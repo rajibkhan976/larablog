@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use View;
 use App\Book;
+use App\Author;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -42,8 +43,23 @@ class BookController extends Controller
    public function store(Request $request)
    {
       //
-       $book = $request->all();
-       Book::create($book);
+       $isbn = $request->input('isbn');
+       $title = $request->input('title');
+       $author_name = $request->input('name');
+       $author_surname = $request->input('surname');
+       $publisher = $request->input('publisher');
+       $image = $request->input('image');
+       $price = $request->input('price');
+       $author = Author::create(array('name' => $author_name, 'surname' => $author_surname));
+       $author_id = $author->id;
+       Book::create(array('isbn' => $isbn, 
+           'title' => $title, 
+           'author' => $author_name, 
+           'publisher' => $publisher, 
+           'image' => $image, 
+           'price' => $price, 
+           'author_id' => $author_id));
+       
        return redirect('book');
       
    }
