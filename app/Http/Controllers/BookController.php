@@ -101,7 +101,9 @@ class BookController extends Controller
       //
        $bookUpdate = $request->all();
        $book = Book::find($id);
+       $author = Author::find($book['author_id']);
        $book->update($bookUpdate);
+       $author->update(array('name' => $request->input('author')));
        return redirect('book'); 
       
    }
