@@ -21,6 +21,7 @@ class CartController extends Controller {
     
     public function postAddToCart(Request $request) {
         
+        if(Auth::check()){
         $rules = array(
             'amount' => 'required|numeric',
             'book'   => 'required|numeric|exists:books,id'
@@ -55,6 +56,10 @@ class CartController extends Controller {
         ));
         
         return Redirect::route('cart');
+        }
+        else{
+           return redirect('book');
+       }
     }
     
     public function getIndex(){

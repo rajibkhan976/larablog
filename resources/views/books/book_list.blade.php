@@ -4,7 +4,8 @@
 <div class="container">
     <div class="span12">
         <div class="row">
-            <p><a href="{{url('/books/create')}}" class="btn btn-success">Add New Book</a></p>
+            <h1 class="text-center">Online Book Store</h1>
+            <p class="text-center"><a href="{{url('/books/create')}}" class="btn btn-success">Add New Book</a></p>
             <ul class="thumbnails">
                 @foreach($books as $book)
               
@@ -17,9 +18,9 @@
                             <p>Price : <b>{{$book->price}}</b></p>
                             <p>
                             <span><a href="{{url('books',$book->id)}}" class="btn btn-primary">Details</a></span>
-                            <span><a href="{{route('books.edit',$book->id)}}" class="btn btn-warning">Update</a></span>
+                            <span><a href="{{url('/books/edit',$book->id)}}" class="btn btn-warning">Update</a></span>
                             <span>
-                                {!! Form::open(['method' => 'DELETE', 'route'=>['books.destroy', $book->id]]) !!}
+                                {!! Form::open(['method' => 'DELETE', 'url'=>['/books/destroy', $book->id]]) !!}
                                 {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                                 {!! Form::close() !!}
                             </span>

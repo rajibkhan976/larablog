@@ -1,8 +1,8 @@
 @extends('layout.template')
 @section('content')
-    <h1>Update Book</h1>
+    <h1>Update Book Metadata</h1>
     @foreach($books as $book)
-    {!! Form::model($book,['method' => 'PATCH','route'=>['books.update',$book->id]]) !!}
+    {!! Form::model($book,['method' => 'PATCH','url'=>['/books/update',$book->id]]) !!}
     <div class="form-group">
         {!! Form::label('ISBN', 'ISBN:') !!}
         {!! Form::text('isbn',null,['class'=>'form-control']) !!}

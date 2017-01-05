@@ -40,7 +40,12 @@ Route::post('user/login', 'UserController@postLogin');
 Route::get('user/logout', 'UserController@getLogout');
 
 Route::get('/book', array('before'=>'auth.basic', 'as' => 'book', 'uses' => 'BookController@getIndex'));
-Route::resource('books','BookController');
+Route::get('/books/create',array('before' => 'auth.basic', 'uses' => 'BookController@create'));
+Route::post('/books', array('before' => 'auth.basic', 'uses' => 'BookController@store'));
+Route::get('/books/edit/{id}', array('before' => 'auth.basic', 'uses' => 'BookController@edit'));
+Route::patch('/books/update/{id}', array('before' => 'auth.basic', 'uses' => 'BookController@update'));
+Route::delete('/books/destroy/{id}', array('before' => 'auth.basic', 'uses' => 'BookController@destroy'));
+Route::get('/books/{id}', array('before' => 'auth.basic', 'uses' => 'BookController@show'));
 
 Route::get('/cart', array('before'=>'auth.basic','as'=>'cart','uses'=>'CartController@getIndex'));
 Route::post('/cart/add',array('before'=>'auth.basic','uses'=>'CartController@postAddToCart'));

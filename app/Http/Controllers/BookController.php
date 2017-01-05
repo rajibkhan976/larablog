@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use View;
+use Auth;
 use App\Book;
 use App\Author;
 use App\Http\Requests;
@@ -33,7 +34,12 @@ class BookController extends Controller
    public function create()
    {
       //
-      return view('books.create');
+       if(Auth::check()){
+       return view('books.create');
+       }
+       else{
+           return redirect('book');
+       }
    }
    /**
     * Store a newly created resource in storage.
@@ -86,8 +92,13 @@ class BookController extends Controller
    public function edit($id)
    {
       //
+       if(Auth::check()){
        $books = Book::with('relAuthor')->where('id','=',$id)->get();
        return view('books.edit')->with('books',$books);
+       }
+       else{
+           return redirect('book');
+       }
       
    }
    /**
@@ -116,7 +127,12 @@ class BookController extends Controller
    public function destroy($id)
    {
       //
+       if(Auth::check()){
        Book::find($id)->delete();
       return redirect('book');
+       }
+       else{
+           return redirect('book');
+       }
    }
 }
